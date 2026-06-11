@@ -154,14 +154,16 @@ n=${1:-"defaultvalue"}
 
 String Comparison Operators Used to compare text strings. 
 
-```bash
-Operator   |      Description               |   Example
+
+|Operator   |      Description               |   Example     |
+|-----------|--------------------------------|---------------|
 = or ==	   | True if strings are equal      |  [ "$a" = "$b" ]
 !=         |True if strings are not equal   |   [ "$a" != "$b" ]
 -z         |True if string is empty         |   [ -z "$a" ]
 -n         |True if string is not empty	    |  [ -n "$a" ]
 < / >      |Lexicographical order(requires [[ ... ]]) |	[[ "$a" < "$b" ]]
-```
+
+
 ```bash
 Operator |        evaluation
 -e       |   The file or directory exists, regardless of its type.
