@@ -238,17 +238,18 @@ Document the most useful flags/patterns for each:
    ```
 5. `sort` — alphabetical, numerical, reverse, unique
    
-    ```
-    Alphabetical        |  Sort(None) |  sort names.txt
+    
+   | Alphabetical        |  Sort(None) |  sort names.txt |
+   |---------------------|-------------|-----------------|
     Reverse Order       |     -r      |  sort -r names.txt
     Numeric Value Sort  |     -n      |  sort -n numbers.txt
     Unique Values Only  |     -u      |  sort -u items.txt
     Case-Insensitive    |     -f      |  sort -f mixed_case.txt
     Human-Readable Sizes|     -h      |  sort -h sizes.txt (e.g., 1K, 2M, 3G)
     Save In-Place       |     -o      |  sort -o file.txt file.txt
-    ```
+   
     
-6. `uniq` — deduplicate, count
+7. `uniq` — deduplicate, count
    
   
    |Option  |      Purpose                                           |        PracticalExample  |
