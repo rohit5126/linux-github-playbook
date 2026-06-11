@@ -1,4 +1,7 @@
+
 # 🐧 Linux + DevOps Cheat Sheet
+
+---
 
 ## 🔹 Linux Commands
 
@@ -87,9 +90,11 @@ du -sh */ | sort -hr | head -5
 
 ---
 
-## 🔹 DevOps Scenarios
+## 🔹 DevOps Scenario-Based Questions (Corrected)
 
-### 11. Nginx down – first check
+### 11. Nginx is reported down after SSH
+
+**Answer:**
 
 ```bash
 systemctl status nginx
@@ -97,71 +102,104 @@ systemctl status nginx
 
 ---
 
-### 12. Nginx not running
+### 12. Nginx process not running
+
+**Answer:**
 
 ```bash
 ps aux | grep nginx
-sudo systemctl start nginx
+sudo systemctl restart nginx
 ```
 
 ---
 
-### 13. Port 80 already in use
+### 13. Nginx fails to start – port 80 already in use
+
+**Answer:**
 
 ```bash
-sudo netstat -tulnp | grep :80
+sudo ss -tulnp | grep :80
+sudo kill <PID>   # or stop conflicting service
+sudo systemctl start nginx
 ```
 
 ---
 
 ### 14. kill vs kill -9
 
-* `kill` → graceful (SIGTERM)
-* `kill -9` → force (SIGKILL)
+**Answer:**
+
+* `kill` → sends SIGTERM (graceful shutdown)
+* `kill -9` → sends SIGKILL (force kill, no cleanup)
 
 ---
 
-### 15. Website not accessible
+### 15. Website not accessible from browser
 
-* Check security group (port 80, CIDR)
-
-```bash
-journalctl -u nginx -n 30
-```
-
----
-
-### 16. Connection timeout
+**Answer:**
 
 ```bash
 systemctl status nginx
-systemctl is-enabled nginx
+ss -tulnp | grep :80
+curl -I localhost
+journalctl -u nginx -n 50
 ```
 
----
-
-### 17. Backend / port not listening
-
-* Verify backend config and interface
-* Check upstream connectivity
+* Also check security group / firewall rules (port 80 open, correct CIDR)
 
 ---
 
-### 18. Permission denied
+### 16. Connection timeout (site not reachable)
+
+**Answer:**
 
 ```bash
-sudo <command>
+systemctl status nginx
+ss -tulnp | grep :80
+sudo systemctl enable nginx
+```
+
+* Check firewall / security group / network ACLs
+
+---
+
+### 17. Port not listening / backend connectivity issue
+
+**Answer:**
+
+```bash
+ss -tulnp | grep <backend_port>
+curl http://localhost:<backend_port>
+```
+
+* Verify nginx upstream config and backend service status
+
+---
+
+### 18. Permission denied error
+
+**Answer:**
+
+```bash
+ls -l <file>
+sudo chown -R www-data:www-data <dir>
+sudo chmod -R 755 <dir>
 ```
 
 ---
 
-### 19. chown www-data
+### 19. What does chown www-data do?
 
-* Assigns ownership to web server user (`www-data`)
+**Answer:**
+
+* Changes ownership to `www-data` (default web server user for nginx/apache)
+* Required so web server can read/write files
 
 ---
 
-### 20. System resource check
+### 20. Check system resource usage
+
+**Answer:**
 
 ```bash
 free -h
@@ -170,6 +208,52 @@ top
 ```
 
 ---
+
+## 🚀 Troubleshooting Flow (Important)
+
+1. Check service
+
+```bash
+systemctl status <service>
+```
+
+2. Check port
+
+```bash
+ss -tulnp
+```
+
+3. Check logs
+
+```bash
+journalctl -u <service>
+```
+
+4. Check network/firewall
+5. Check permissions
+
+---
+
+### 17. Backend / port not listening
+
+* Verify backend config and interface (local interface:127.0.0.1 #only accessible from the machine)
+  (all network interface:0.0.0.0 #accessible from everywhere)
+* Check upstream connectivity
+
+---
+
+
+### 19. chown www-data
+
+* Assigns ownership to web server user (`www-data`)
+  
+  `chown -R www-data:www-data /ver/log/nginx`
+
+  check for the user name in `ps -aux | grep nginx`
+  
+
+---
+
 
 ## 🚀 Tips
 
