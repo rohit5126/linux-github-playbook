@@ -175,14 +175,14 @@ String Comparison Operators Used to compare text strings.
 -x       |   The file exists and grants execute permission to the user.
 -o       |   The file exists and is owned to the user.
 -h/-l    |   The file exists and is a symbolic link.
-```
+
 -------------------------------------------------------------------------------------------------
 
 Document the most useful flags/patterns for each:
 
 1. `grep` — search patterns, `-i`, `-r`, `-c`, `-n`, `-v`, `-E`
    
-   ```bash
+   ```
 
    grep -c "error" file.log
 
@@ -196,7 +196,7 @@ Document the most useful flags/patterns for each:
    ```
 2. `awk` — print columns, field separator, patterns, `BEGIN/END`
    
-   ```bash
+   ```
    awk '{print $1, $3}' data.txt #prints 1st and 3rd column
 
    awk -F':' '{print $1}' /etc/passwd #this will change seperator to : by default it is white space.
@@ -216,7 +216,7 @@ Document the most useful flags/patterns for each:
    
 3. `sed` — substitution, delete lines, in-place edit
    
-   ```bash
+   ```
    # Search & Replace: Replace the first occurrence of a word per line:
    sed 's/old-word/new-word/' filename.txt
    # Global Replacement: Replace every occurrence of a word per line:
@@ -228,7 +228,7 @@ Document the most useful flags/patterns for each:
    ```
 4. `cut` — extract columns by delimiter
    
-   ```bash
+   ```
    # Pull the 1st field from a comma-separated string
    echo "John,Doe,30,Engineer" | cut -d ',' -f 1
    # Output: John
@@ -238,7 +238,7 @@ Document the most useful flags/patterns for each:
    ```
 5. `sort` — alphabetical, numerical, reverse, unique
    
-    ```bash
+    ```
     Alphabetical        |  Sort(None) |  sort names.txt
     Reverse Order       |     -r      |  sort -r names.txt
     Numeric Value Sort  |     -n      |  sort -n numbers.txt
@@ -250,28 +250,30 @@ Document the most useful flags/patterns for each:
     
 6. `uniq` — deduplicate, count
    
-    ```bash
-    Option  |      Purpose                                           |        PracticalExample
+  
+   |Option  |      Purpose                                           |        PracticalExample  |
+   |--------|--------------------------------------------------------|--------------------------|
     Default |   Removes sequential duplicate lines.                  |      sort files.txt | uniq                            
     -c      | Prefixes each line with its count of occurrences.      |      sort files.txt | uniq -c             
     -d      | Prints only the lines that are duplicated.             |      sort files.txt | uniq -d                              
     -u      | Prints only unique lines (completely skips duplicates).|     sort files.txt | uniq -u
     -i      | Ignores differences in uppercase and lowercase.        |     sort files.txt | uniq -i
-    ```
+   
     
 8. `tr` — translate/delete characters
     
 9. `wc` — line/word/char count
-    ```bash
-    Option    |       Description                                      |    Output Example
+   
+   |Option    |       Description                                      |    Output Example |
+   |----------|--------------------------------------------------------|-------------------|
      -l       | Counts newlines / lines.                               |    42 file.txt
      -w       | Counts words (delimited byspaces, tabs, or newlines).  |   350 file.txt
      -m       |Counts characters.                                      |   2048 file.txt
      -c       |Counts bytes (multi-byte characters like emojis take up more bytes).|   2048 file.txt
      -L       |Prints the length of the longest line in characters.    |   17 file.txt
-    ```
+  
     
-10. `head` / `tail` — first/last N lines, follow mode
+11. `head` / `tail` — first/last N lines, follow mode
 -----------------------------------------------------------------------------------------------------------
 
 # Task 6: Useful Patterns and One-Liners
