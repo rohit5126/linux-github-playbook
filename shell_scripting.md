@@ -164,8 +164,8 @@ String Comparison Operators Used to compare text strings.
 < / >      |Lexicographical order(requires [[ ... ]]) |	[[ "$a" < "$b" ]]
 
 
-```bash
-Operator |        evaluation
+|Operator |        evaluation              |
+|---------|--------------------------------|
 -e       |   The file or directory exists, regardless of its type.
 -f       |   The path exists and is a regular file (not a directory or device).
 -d       |   The path exists and is a directory.
