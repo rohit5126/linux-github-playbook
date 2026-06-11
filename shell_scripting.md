@@ -144,12 +144,12 @@ n=${1:-"defaultvalue"}
 ```bash
 |Operator  |   Description          |      Example  |
 |----------|------------------------|---------------|
--eq       |    Equal to            |     [ $a -eq $b ]
--ne       |   Not equal to         |     [ $a -ne $b ]
--gt       |   Greater than         |     [ $a -gt $b ]
--ge       |Greater than or equal to|  	[ $a -ge $b ]
--lt       |    Less than           |    [ $a -lt $b ]
--le       |  Less than or equal to |    [ $a -le $b ]
+|-eq       |    Equal to            |     [ $a -eq $b ] |
+|-ne       |   Not equal to         |     [ $a -ne $b ] |
+|-gt       |   Greater than         |     [ $a -gt $b ] |
+|-ge       |Greater than or equal to|  	[ $a -ge $b ] |
+|-lt       |    Less than           |    [ $a -lt $b ] |
+|-le       |  Less than or equal to |    [ $a -le $b ] |
 ```
 
 String Comparison Operators Used to compare text strings. 
