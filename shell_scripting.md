@@ -141,7 +141,7 @@ n=${1:-"defaultvalue"}
 
 **"$@" take every arg into a list**
 
-```bash
+
 |Operator  |   Description          |      Example  |
 |----------|------------------------|---------------|
 |-eq       |    Equal to            |     [ $a -eq $b ] |
@@ -150,7 +150,7 @@ n=${1:-"defaultvalue"}
 |-ge       |Greater than or equal to|  	[ $a -ge $b ] |
 |-lt       |    Less than           |    [ $a -lt $b ] |
 |-le       |  Less than or equal to |    [ $a -le $b ] |
-```
+
 
 String Comparison Operators Used to compare text strings. 
 
