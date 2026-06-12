@@ -1,5 +1,5 @@
 
-# 🐧 Linux + DevOps Cheat Sheet
+# 🐧 Linux Cheat Sheet
 
 ---
 
