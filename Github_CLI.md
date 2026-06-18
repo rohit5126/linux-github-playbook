@@ -83,11 +83,82 @@ gh gist  view |          View a gist
 
 **issue**       #Manage issues
 
+|COMMANDS|   usage |
+|----------|----------|
+gh issue create|        Create a new issue
+gh issue  list |         List issues in a repository
+gh issue   status|        Show status of relevant issues
+gh issue   close|         Close issue
+gh issue   comment|    Add a comment to an issue
+gh issue   delete |        Delete issue
+gh issue   develop |      Manage linked branches for an issue
+gh issue   edit |        Edit issues
+gh issue  lock |          Lock issue conversation
+gh issue   pin |          Pin an issue
+gh issue   reopen |        Reopen issue
+gh issue   transfer |     Transfer issue to another repository
+gh issue   unlock |       Unlock issue conversation
+gh issue   unpin |      Unpin an issue
+gh issue   view |         View an issue
+-----------------------------------------------------
 
-  org:           Manage organizations
-  pr:            Manage pull requests
-  project:       Work with GitHub Projects.
-  release:       Manage releases
-  repo:          Manage repositories
-  skill:         Install and manage agent skills (preview)
+**pr**            Manage pull requests
+|COMMANDS|   usage |
+|----------|----------|
+gh pr create|        Create a pull request
+gh pr   list|         List pull requests in a repository
+gh pr   status|        Show status of relevant pull requests
+gh pr   checkout|    Check out a pull request in git
+gh pr   checks|     Show CI status for a single pull request
+gh pr   close|        Close a pull request
+gh pr   comment|      Add a comment to a pull request
+gh pr   diff|         View changes in a pull request
+gh pr   edit|          Edit a pull request
+gh pr   lock|         Lock pull request conversation
+gh pr   merge|         Merge a pull request
+gh pr   ready|         Mark a pull request as ready for review
+gh pr   reopen|       Reopen a pull request
+gh pr   revert|        Revert a pull request
+gh pr   review|       Add a review to a pull request
+gh pr   unlock|        Unlock pull request conversation
+gh pr   update-branch| Update a pull request branch
+gh pr   view|          View a pull request
+---------------------------------------------
 
+
+  **skill**         Install and manage agent skills (preview)
+
+  |COMMANDS|   usage |
+|----------|----------|
+gh skill install|      Install agent skills from a GitHub repository (preview)
+gh skill  preview|     Preview a skill from a GitHub repository (preview)
+gh skill  publish|       Validate and publish skills to a GitHub repository (preview)
+gh skill  search|        Search for skills across GitHub (preview)
+gh skill  update|        Update installed skills to their latest versions (preview)
+-----------------------------------------------------  
+
+**additional commands**
+|COMMANDS|   usage |
+|----------|----------|
+  project:   |    Work with GitHub Projects.
+  release:    |   Manage releases
+  agent-task:  |  Work with agent tasks (preview)
+  alias:        | Create command shortcuts
+  api:          | Make an authenticated GitHub API request
+  attestation:  | Work with artifact attestations
+  completion:   | Generate shell completion scripts
+  config:       | Manage configuration for gh
+  copilot:      | Run the GitHub Copilot CLI (preview)
+  extension:    | Manage gh extensions
+  gpg-key:      | Manage GPG keys
+  label:        | Manage labels
+  licenses:     | View third-party license information
+  preview:      | Execute previews for gh features
+  ruleset:      | View info about repo rulesets
+  search:       | Search for repositories, issues, and pull requests
+  secret:       | Manage GitHub secrets
+  ssh-key:      | Manage SSH keys
+  status:       | Print information about relevant issues, pull requests, and notifications across repositories
+  variable:     | Manage GitHub Actions variables
+
+--------------------------------------------
