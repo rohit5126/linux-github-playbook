@@ -111,3 +111,120 @@
 
 ### 7. arrayn convert in shell script.
 mapfile -t i < nginx.log
+
+
+### 9. tar command
+```
+# Create a tar archive
+tar -cvf archive.tar file1 file2 dir/
+
+# Create a compressed tar (gzip)
+tar -czvf archive.tar.gz file1 file2 dir/
+
+# Create a compressed tar (bzip2)
+tar -cjvf archive.tar.bz2 file1 file2 dir/
+
+# Create a compressed tar (xz)
+tar -cJvf archive.tar.xz file1 file2 dir/
+
+# Extract a tar archive
+tar -xvf archive.tar
+
+# Extract gzip tar
+tar -xzvf archive.tar.gz
+
+# Extract bzip2 tar
+tar -xjvf archive.tar.bz2
+
+# Extract xz tar
+tar -xJvf archive.tar.xz
+
+# Extract to specific directory
+tar -xvf archive.tar -C /destination/path/
+
+# List contents of tar
+tar -tvf archive.tar
+
+# Add files to existing tar
+tar -rvf archive.tar newfile
+
+# Extract specific file
+tar -xvf archive.tar file1
+
+# Create archive excluding files
+tar -czvf archive.tar.gz /path --exclude="*.log"
+
+# Create archive from find
+find /path -name "*.log" -print0 | tar -czvf logs.tar.gz --null -T -
+```
+
+### 8. find command
+```
+# Basic syntax
+find [path] [options] [expression]
+
+# Search by name
+find /path -name "file.txt"
+find /path -iname "file.txt"
+find /path -name "*.log"
+
+# Search by type
+find /path -type f
+find /path -type d
+find /path -type l
+
+# Search by size
+find /path -size +100M
+find /path -size -50M
+find /path -size 10M
+
+# Search by time
+find /path -mtime -1
+find /path -mtime +7
+find /path -atime -1
+find /path -ctime -1
+
+# Search by user/group
+find /path -user rohit
+find /path -group devops
+
+# Search by permissions
+find /path -perm 777
+find /path -perm -644
+
+# Combine conditions
+find /path -type f -name "*.log"
+find /path -name "*.log" -o -name "*.txt"
+
+# Exclude files
+find /path -type f ! -name "*.log"
+
+# Execute commands
+find /path -name "*.log" -exec rm {} \;
+find /path -name "*.log" -exec ls -lh {} \;
+
+# Faster execution
+find /path -name "*.log" -exec rm {} +
+
+# Delete files
+find /path -name "*.log" -delete
+
+# Empty files/dirs
+find /path -empty
+
+# Depth control
+find /path -maxdepth 1
+find /path -mindepth 2
+
+# Print details
+find /path -type f -ls
+
+# Copy files
+find /path -name "*.txt" -exec cp {} /destination/ \;
+
+# Real examples
+find /var/log -type f -name "*.log" -mtime -1
+find /path -type f -mtime +30 -delete
+find / -type f -size +500M
+find /path -type f -name "*.log" -print0 | xargs -0 tar -czvf logs.tar.gz
+```
