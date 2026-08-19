@@ -7,7 +7,7 @@ Use this as prep material: a one-line pitch, the architecture in your own words,
 
 ## 1. The 30-second pitch
 
-"I built a demo banking application and used it as a vehicle to build a full production-style DevSecOps platform around it: Spring Boot app on EKS, GitOps deployment with ArgoCD's App-of-Apps pattern, a security-gated CI pipeline (lint, secret scan, dependency scan, image scan) that pushes straight through to a running rollback-able deployment, automated secret rotation with Lambda + Secrets Manager, free automated HTTPS via DuckDNS + cert-manager, and Ansible to reproducibly bootstrap the one jump server an operator needs."
+"I forked a demo banking application and used it as a vehicle to build a full production-style DevSecOps platform around it: Spring Boot app on EKS, GitOps deployment with ArgoCD's App-of-Apps pattern, a security-gated CI pipeline (lint, secret scan, dependency scan, image scan) that pushes straight through to a running rollback-able deployment, automated secret rotation with Lambda + Secrets Manager, free automated HTTPS via DuckDNS + cert-manager, and Ansible to reproducibly bootstrap the one jump server an operator needs."
 
 ---
 
@@ -42,8 +42,8 @@ Use this as prep material: a one-line pitch, the architecture in your own words,
 ## 4. GitOps flow, end to end
 
 1. Developer opens a PR → GitHub Actions runs Checkstyle, Gitleaks, Trivy dependency scan, and a Trivy image scan on a trial build. PR is blocked if anything fails.
-2. PR merges to `main` → the image is rebuilt, scanned again, tagged, and pushed to Docker Hub.
-3. CI commits the new image tag back into the GitOps manifests (`k8s/bankapp-deployment.yml` or the Helm values file).
+2. PR merges to `main` → the image is rebuilt, scanned using sonar cube, tagged, and pushed to Docker Hub.
+3. CI commits the new image tag back into the GitOps manifests (`k8s/bankapp-deployment.yml`).
 4. ArgoCD's reconciliation loop sees the Git diff and syncs the `bankapp` Application — new pods roll out.
 5. If something manual changes the cluster directly (`kubectl edit`), ArgoCD's `selfHeal` reverts it on the next sync — Git, not the cluster, is the source of truth.
 
