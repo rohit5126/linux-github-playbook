@@ -335,5 +335,21 @@ Your production website is suddenly down.
 
 “I will not immediately restart the service. First I will identify the root cause and check recent deployments, as most production issues are caused by recent changes.”
 
+---
 
+What I'd expect you to say in an interview
+
+"Before applying, I would first inspect the Terraform plan carefully and identify which attribute is forcing the EC2 instance replacement. Since this is production, I wouldn't immediately apply the change. I would verify whether the replacement is actually required and check the impact on the application. If replacement is unavoidable, I would plan a safe migration strategy, such as creating the replacement instance before destroying the existing one using create_before_destroy, provided the architecture and resource constraints allow it. I'd also make sure the application data is not tied to the instance and that backups, health checks and rollback procedures are in place. For a production workload, I would review the plan and change through the normal approval process before applying it."
+
+Extra point
+
+If the application is stateful or the EC2 instance contains important data, create_before_destroy doesn't magically migrate that data.
+
+This is why a mature DevOps answer considers:
+
+Terraform change → impact → state/data → availability → backup → rollout → rollback
+
+rather than just:
+
+Terraform wants replacement → add lifecycle → apply.
 
