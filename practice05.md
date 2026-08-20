@@ -425,3 +425,89 @@ Score: 8/10
 
 Your troubleshooting direction is good. The next improvement is to avoid jumping directly to logs—first establish exactly what is consuming the disk.
 
+---
+
+Good answer to finish the test. You correctly identified resource pressure + scaling as one possible cause, and kubectl top pods is a useful command.
+
+But for a production troubleshooting question, you jumped to HPA too early. The interviewer wants to see that you first prove where the bottleneck is.
+
+What you did well
+Considered insufficient CPU/memory.
+
+Used:
+
+kubectl top pods
+Understood that increased traffic can require more pod replicas.
+Correctly identified HPA as a potential solution.
+What I'd improve
+
+Don't assume:
+
+"The pods don't have enough resources, so I'll create an HPA."
+
+First determine where the request is becoming slow.
+
+I'd troubleshoot layer by layer:
+
+User
+ ↓
+Load Balancer / Ingress
+ ↓
+Frontend
+ ↓
+Backend/API
+ ↓
+Database
+1. Check whether the problem is widespread
+kubectl get pods -A
+kubectl get nodes
+kubectl top nodes
+kubectl top pods -A
+
+Look for CPU/memory pressure, OOM, pod restarts, or unhealthy nodes.
+
+2. Check the ingress/load balancer
+
+Since users are timing out, verify whether requests are reaching Kubernetes and whether the LB/Ingress is reporting errors or high latency.
+
+3. Check frontend/backend
+
+Don't only check frontend logs. Check the backend too:
+
+kubectl logs <frontend-pod>
+kubectl logs <backend-pod>
+
+Look for:
+
+Timeout errors
+5xx responses
+Slow API calls
+Connection failures
+4. Check services/endpoints
+kubectl get svc
+kubectl get endpoints
+
+Make sure traffic is actually reaching healthy pods.
+
+5. Check database
+
+If the backend is waiting for the database, adding frontend pods won't solve the problem.
+
+I'd check:
+
+DB CPU/memory
+Connection count
+Slow queries
+Connection pool exhaustion
+Database locks
+6. Then consider scaling
+
+If metrics prove that pods are CPU/memory constrained and traffic is increasing, then I'd consider HPA.
+
+Also verify that the deployment has appropriate:
+
+resources:
+  requests:
+  limits:
+
+because HPA commonly relies on resource metrics such as CPU utilization.
