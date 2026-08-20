@@ -353,3 +353,75 @@ rather than just:
 
 Terraform wants replacement → add lifecycle → apply.
 
+---
+
+ow would you troubleshoot and resolve the issue?
+
+Walk me through your approach step by step.
+
+i will ssh into the server and check the usage df -h, then I will check which folder is using highest disk space, then I will check the disk usage of log file using du -sh /home/var/log, and if its using alot of space I will delete older log files find and delete it. 
+
+Good start. You have the right first step, but there are a couple of important command corrections and one major troubleshooting point.
+
+What you did well
+
+Your approach:
+
+SSH → df -h → identify where space is being consumed → investigate logs → clean old files
+
+That's correct.
+
+Corrections
+
+You mentioned:
+
+du -sh /home/var/log
+
+The usual system log location is:
+
+/var/log
+
+To find the biggest directories:
+
+sudo du -xh /var/log | sort -h | tail -n 10
+
+Or to find large directories from the root filesystem:
+
+sudo du -xh / --max-depth=1 | sort -h
+
+Then investigate further.
+
+For old log files, don't immediately delete them. First check whether logrotate is configured:
+
+sudo logrotate -d /etc/logrotate.conf
+
+You can also find large files:
+
+sudo find /var -type f -size +500M -ls
+Important interview point
+
+Before deleting anything, determine what is consuming the disk. It might be:
+
+Application logs
+Docker images/containers
+Deleted files still held open
+Package caches
+Core dumps
+Temporary files
+Database files
+
+For example, if Docker is involved:
+
+docker system df
+
+And if df shows high usage but du doesn't explain it, check deleted-but-open files:
+
+sudo lsof +L1
+Interview-ready flow
+
+"First I would check df -h to identify which filesystem is at 95%. Then I would use du to identify the directories consuming the most space and drill down to the largest files. If logs are responsible, I would check log rotation and safely remove or rotate old logs rather than blindly deleting active log files. I would also check Docker, temporary files, package caches, and deleted files still held open by processes. After cleanup, I would verify the disk usage again with df -h."
+
+Score: 8/10
+
+Your troubleshooting direction is good. The next improvement is to avoid jumping directly to logs—first establish exactly what is consuming the disk.
+
